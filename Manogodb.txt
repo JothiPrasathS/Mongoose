@@ -1,0 +1,191 @@
+Database -> Collection -> Document
+
+To show list of db
+
+	show dbs 
+
+
+To create db
+
+	use dbname
+
+To exit from current db
+
+	exit
+
+to use db and insert one element
+
+	use dbname
+
+	db.collectionName.insertOne({key : "value"})
+
+to show the all elements in db
+
+	db.collectionName.find()
+
+to use db and insert many element
+
+	db.collectionName.insertMany([{key1 : "value"},{key2 : "value"}])
+
+to display the required no of data
+
+	db.collectionName.find().limit(2)
+
+to display the required no of data with sorting (eg: with name alphabets) (1 = proper order) and limiting
+
+	db.collectionName.find().sort( {name: 1}).{limit(2)
+
+to display the required no of data with sorting (eg: with name alphabets) ( -1 = rever order) and limiting
+
+	db.collectionName.find().sort( {name: -1}).{limit(2)
+
+to display the required no of data with sorting (eg: with name alphabets and age) (1 = proper order & -1 = rever order) and limiting
+
+	db.collectionName.find().sort( {age: 1 , name: 1}).{limit(2)
+
+to display the required no of data and skip (no of data)
+
+	db.collectionName.find().skip(1).limit(2)
+
+to show the specific elements in db but display all sub elements
+
+	db.collectionName.find({name: "Pname"})
+
+to show the specific elements in db (1= display, 0= not display)
+
+	db.collectionName.find({name: "Pname"},{name:1, age:1, _id:0})
+
+to show the specific elements in db by equal to
+
+	db.collectionName.find({name: {$eq:"Pname"}})
+
+to show the specific elements in db by not equal to
+
+	db.collectionName.find({name: {$ne:"Pname"}})
+
+to show the specific elements in db by greater then
+
+	db.collectionName.find({age: {$gt : 25}})
+
+to show the specific elements in db by greater then equal to
+
+	db.collectionName.find({age: {$gte : 25}})
+
+to show the specific elements in db by less then
+
+	db.collectionName.find({age: {$lt : 25}})
+
+to show the specific elements in db by less then equal to
+
+	db.collectionName.find({age: {$lte : 25}})
+
+to display the required values by using "in"
+
+	db.collectionName.find({name: {$in: ["P1name", P2name] }})
+
+to display the required values without unwanted values by using "nin"
+
+	db.collectionName.find({name: {$nin: ["P1name", P2name] }})
+
+to display the Values exists 
+
+	db.collectionName.find({age: {$exists : true}})
+
+to display the Values not exists 
+
+	db.collectionName.find({age: {$exists : false}})
+
+to display the Values with two logics 
+
+	db.collectionName.find({age: {$gte : no.1, $lte: no.2}})
+
+	db.collectionName.find({age: {$gte : no.1, $lte: no.2}, name : "Pname"})
+
+
+And Operation
+
+	db.collectionName.find({$and [{age: no.1}, {name: "Pname"}]})
+
+
+Or Operation
+
+	db.collectionName.find({$or [{age: no.1}, {name: "Pname"}]})
+
+
+Not Operation
+
+	db.collectionName.find({age: {$not {$gte : 25}}})	
+
+Comparing two queries two parameters by adding $ symbol before parameter and $expr
+
+	db.collectionName.find({$expr: {$gt : ["$dept", "$balance" ]}})
+
+Comparing two queries two parameters by adding $ symbol before parameter and $expr and display one value
+
+	db.collectionName.findOne({$expr: {$gt : ["$dept", "$balance" ]}})
+
+Comparing two queries two parameters by adding $ symbol before parameter and $expr and to counts the no of data there 
+
+	db.collectionName.countDocuments({$expr: {$gt : ["$dept", "$balance" ]}})
+
+to counts the no of data use
+
+	db.collectionName.countDocuments({age: {$gt : 25}})
+
+To go into parameter and get sub values by using .
+
+	db.collectionName.find({"address.city": "New york"})
+
+To Update one data by
+
+	db.collectionName.updateOne({age: 44}, {$set :{age : 34}})
+
+To Update one data by using _id
+
+	db.collectionName.updateOne({_id: ObjectId("653fc1e34d3a76b7727f11dc")}, {$set :{name : "Lidya"}})
+
+Increment the value by
+
+	db.collectionName.updateOne({_id: ObjectId("653fc1e34d3a76b7727f11dc")}, {$inc :{age : 3}})
+
+Rename the value by
+
+	db.collectionName.updateOne({_id: ObjectId("653fc1e34d3a76b7727f11dc")}, {$rename :{balance : "remaing balance"}})
+
+To add the value by 
+
+	db.collectionName.updateOne({_id: ObjectId("653fc1e34d3a76b7727f11dc")}, {$push :{hobbies : "Press Like"}})
+
+To remove the value by 
+
+	db.collectionName.updateOne({_id: ObjectId("653fc1e34d3a76b7727f11dc")}, {$pull :{hobbies : "Press Like"}})
+
+To remove the parameter by (remove age)
+
+	db.collectionName.updateOne({_id: ObjectId("653fc1e34d3a76b7727f11dc")}, {$unset :{age : ""}})
+
+To Update many data by using _id (remove all address if exists)
+
+	db.collectionName.updateOne({address: {$exists: true}}, {$unset :{address : ""}})
+
+To replace one value by (replace all value with one value)
+
+	db.collectionName.replaceOne({age:19}, {name: "Joe"})
+
+To delete one value by
+	 
+	db.collectionName.deleteOne({debt:2000})
+
+To delete many value by ( not age - delete all)
+	 
+	db.collectionName.deleteMany({age:{$exists : false}})
+
+To show list of collections
+
+	show collections 
+
+To delete db
+
+	db.dropDatabase() 
+
+mangoose -> schema => model => query
